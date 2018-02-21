@@ -20,12 +20,30 @@ class Sorter {
   }
 
   sort(indices) {
-    // your implementation
+    var i=0;
+    var tmpArr = new Array(indices.length);
+    
+    for(i=0;i<indices.length;i++){
+    	tmpArr[i] = this.array_[indices[i]];
+    }
+
+    if (this.compareFunction_ === undefined){
+    	tmpArr.sort(function(a,b) {return a - b; });
+    } else {
+    	tmpArr.sort(this.compareFunction_);
+    }
+	
+	indices.sort(function(a,b) {return a - b; });
+
+	for(i=0;i<indices.length;i++){
+    	this.array_[indices[i]] = tmpArr[i];
+    }
   }
 
   setComparator(compareFunction) {
-    // your implementation
+    this.compareFunction_ = compareFunction;
   }
 }
+
 
 module.exports = Sorter;
